@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -11,7 +13,21 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        //RAW SQL
+        //$servicesRaw = DB::select('SELECT * FROM services');
+
+        //QUERY BUILDER
+        //$servicesQueryBuilder = DB::table('services')->get();
+
+        //ELOQUENT ORM
+        //$servicesEloquent = Service::all();
+
+        //dd($servicesRaw, $servicesQueryBuilder, $servicesEloquent);
+
+        // 
+        $allServices = DB::table('services')->get();
+
+        return view('services.index', ['services' => $allServices]);
     }
 
     /**

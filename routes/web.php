@@ -17,18 +17,22 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::resource('photos', PhotoController::class);
+Route::resource('services', ServiceController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('unresources', UnresourceController::class);
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/welcome', function(){
-    return "Selamat Datang di Portal Kesehatan";
-});
-
-Route::get('/menu', function(){
-    return view('menu');
-})->name('menu');
+    });
+    
+    Route::get('/welcome', function(){
+        return "Selamat Datang di Portal Kesehatan";
+        });
+        
+        Route::get('/menu', function(){
+            return view('menu');
+            })->name('menu');
 
 Route::get('/menu/{menu}', function($menu){
     if($menu=="konsultasi"){
@@ -58,10 +62,8 @@ Route::get('/admin/{admincat}', function($admincat){
     
 })->name('admin.page');
 
-Route::resource('photos', PhotoController::class);
-Route::resource('services', ServiceController::class);
-Route::resource('categories', CategoryController::class);
-Route::resource('unresources', UnresourceController::class);
+
+// Route::get('/photos', PhotoController::class, 'store');
 
 
 
