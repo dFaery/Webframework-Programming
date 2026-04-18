@@ -18,7 +18,7 @@
                     class="img-fluid mb-3">
                 <h3>Aplikasi Portal Kesehatan</h3>
                 <p>Lorem ipsum dolor sit amet...</p>                
-                <a href="{{ route('menu') }}" class="btn btn-primary">Start Konsultasi</a>
+                <a href="{{ route('menu') }}" class="btn btn-primary">Mulai</a>
             </div>
         </div>
     </div>

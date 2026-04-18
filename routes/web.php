@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UnresourceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\TransactionController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,49 +22,55 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::resource('photos', PhotoController::class);
-Route::resource('services', ServiceController::class);
-Route::resource('categories', CategoryController::class);
 Route::resource('unresources', UnresourceController::class);
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
     });
     
     Route::get('/welcome', function(){
         return "Selamat Datang di Portal Kesehatan";
-        });
-        
-        Route::get('/menu', function(){
-            return view('menu');
-            })->name('menu');
+        });                
 
-Route::get('/menu/{menu}', function($menu){
-    if($menu=="konsultasi"){
-        return view('konsultasi');
-    }
-    else if($menu=="janji"){
-        return view('janji');
-    }
-    else{
-        return "Halaman tidak ditemukan";
-    }
-})->name('menu.page');
+Route::resource('home', HomeController::class);
+Route::resource('services', ServiceController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('doctors', DoctorController::class);
+Route::resource('transactions', TransactionController::class);
+// Route::resource('/home', HomeController::class);
+// Route::resource('/home', HomeController::class);
 
-Route::get('/admin/{admincat}', function($admincat){
-    if($admincat=="categories"){
-        return "Portal Manajemen: Daftar Kategori Layanan";
-    }
-    else if($admincat=="order"){
-        return "Portal Manajemen: Daftar Konsultasi dan Janji Temu";
-    }
-    else if($admincat=="members"){
-        return "Portal Manajemen: Daftar Pasien";
-    }
-    else{
-        return "Halaman tidak ditemukan";
-    }
+// Route::get('/menu/{menu}', function($menu){
+//     if($menu=="konsultasi"){
+//         return view('konsultasi');
+//     }
+//     else if($menu=="janji"){
+//         return view('janji');
+//     }
+//     else{
+//         return "Halaman tidak ditemukan";
+//     }
+// })->name('menu.page');
+
+// Route::get('/admin/{admincat}', function($admincat){
+//     if($admincat=="categories"){
+//         return "Portal Manajemen: Daftar Kategori Layanan";
+//     }
+//     else if($admincat=="order"){
+//         return "Portal Manajemen: Daftar Konsultasi dan Janji Temu";
+//     }
+//     else if($admincat=="members"){
+//         return "Portal Manajemen: Daftar Pasien";
+//     }
+//     else{
+//         return "Halaman tidak ditemukan";
+//     }
     
-})->name('admin.page');
+// })->name('admin.page');
+
+// Route::get('/index2',function(){
+//     return view('index2');
+// });
 
 
 // Route::get('/photos', PhotoController::class, 'store');

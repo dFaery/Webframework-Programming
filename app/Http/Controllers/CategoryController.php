@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,9 +13,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $allCategories = DB::table('categories')->get();
+        $categories = Category::all();
 
-        return view('services.index', ['categories' => $allCategories]);
+        return view('pages.categories.index', compact('categories'));
+
+        // $allCategories = DB::table('categories')->get();
+
+        // return view('services.index', ['categories' => $allCategories]);
     }
 
     /**

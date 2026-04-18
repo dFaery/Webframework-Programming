@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class ServiceController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $services = Service::all();
-        
-        return view('pages.services.index', compact("services"));
+        $transactions = Transaction::all();
+
+        return view('pages.transactions.index', compact('transactions'));
     }
 
     /**
@@ -37,17 +36,15 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Transaction $transaction)
     {
-        $service = Service::find($id);
-        // dd($service);
-        return view('pages.services.show', compact('service'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Transaction $transaction)
     {
         //
     }
@@ -55,7 +52,7 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Transaction $transaction)
     {
         //
     }
@@ -63,7 +60,7 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Transaction $transaction)
     {
         //
     }
