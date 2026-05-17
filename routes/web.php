@@ -37,6 +37,8 @@ Route::resource('services', ServiceController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('transactions', TransactionController::class);
+
+Route::post("/category/showInfo",[CategoryController::class, 'showInfo'])->name("category.showInfo");
 // Route::resource('/home', HomeController::class);
 // Route::resource('/home', HomeController::class);
 

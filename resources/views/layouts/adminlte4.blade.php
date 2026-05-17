@@ -58,8 +58,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<!--end::Head-->
-<!--begin::Body-->
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->
@@ -283,7 +281,7 @@
                         class="nav sidebar-menu flex-column"
                         data-lte-toggle="treeview"
                         role="menu"
-                        data-accordion="false">                        
+                        data-accordion="false">
                         <li class="nav-item">
                             <a href="/home" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-house-door"></i>
@@ -692,7 +690,7 @@
                             </a>
                         </li>
                     </ul> -->
-                    <!--end::Sidebar Menu-->
+                        <!--end::Sidebar Menu-->
                 </nav>
             </div>
             <!--end::Sidebar Wrapper-->
@@ -701,6 +699,10 @@
         <!--begin::App Main-->
         <main class="app-main">
             @yield("content")
+
+            @stack('modals')
+            @stack('modal')
+            @stack('script')
         </main>
         <!--end::App Main-->
         <!--begin::Footer-->

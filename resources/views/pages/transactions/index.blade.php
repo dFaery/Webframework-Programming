@@ -4,7 +4,10 @@
 <title>Transactions</title>
 @endsection
 @section('content')
-<h1>TRANSACTIONS TABLE</h1>
+<div class="container-fluid">
+    <h1>TRANSACTIONS TABLE</h1>
+    <a href="/transactions/create" class="btn btn-primary">+ Add new transactions</a>
+</div>
 <div class="container">
     <table class="table">
         <thead>
@@ -13,13 +16,13 @@
                 <th>user_id</th>
                 <th>doctor_id</th>
                 <th>transaction_code</th>
-                <th>schedule_time</th>                
-                <th>consultation_fee</th>                
-                <th>admin_fee</th>                
-                <th>total_price</th>                
-                <th>payment_method</th>                
-                <th>payment_status</th>                
-                <th>transaction_status</th>                
+                <th>schedule_time</th>
+                <th>consultation_fee</th>
+                <th>admin_fee</th>
+                <th>total_price</th>
+                <th>payment_method</th>
+                <th>payment_status</th>
+                <th>transaction_status</th>
             </tr>
         </thead>
         <tbody>
@@ -29,13 +32,13 @@
                 <td>{{ $transaction->user_id }}</td>
                 <td>{{ $transaction->doctor_id }}</td>
                 <td>{{ $transaction->transaction_code }}</td>
-                <td>{{ $transaction->schedule_time }}</td>                
-                <td>{{ $transaction->consultation_fee }}</td>                
-                <td>{{ $transaction->admin_fee }}</td>                
-                <td>{{ $transaction->total_price }}</td>                
-                <td>{{ $transaction->payment_method }}</td>                
-                <td>{{ $transaction->payment_status }}</td>                
-                <td>{{ $transaction->transaction_status }}</td>                
+                <td>{{ $transaction->schedule_time }}</td>
+                <td>{{ $transaction->consultation_fee }}</td>
+                <td>{{ $transaction->admin_fee }}</td>
+                <td>{{ $transaction->total_price }}</td>
+                <td>{{ $transaction->payment_method }}</td>
+                <td>{{ $transaction->payment_status }}</td>
+                <td>{{ $transaction->transaction_status }}</td>
             </tr>
             @endforeach
         </tbody>

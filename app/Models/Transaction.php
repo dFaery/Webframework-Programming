@@ -8,11 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
-    public function doctor(){
+    public function doctor()
+    {
         return $this->belongsTo(Doctor::class, 'id');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'id');
+    }
+
+    public function services()
+    {        
+        return $this->belongsToMany(Service::class)->withTimestamps();
     }
 }

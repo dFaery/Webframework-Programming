@@ -3,7 +3,10 @@
 <title>Services</title>
 @endsection
 @section('content')
-<h1>SERVICES TABLE</h1>
+<div class="container">
+    <h1>SERVICES TABLE</h1>
+    <a href="/services/create" class="btn btn-primary">+ Add new service</a>
+</div>
 <div class="container">
     <table class="table">
         <thead>

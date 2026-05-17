@@ -26,8 +26,8 @@ class CategoryController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
+    {        
+        return view('pages.categories.create');
     }
 
     /**
@@ -35,16 +35,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Category();
+        $data->name = $request->get('name');
+        $data->save();
+        return redirect()->route('categories.index')->with('success', 'Sucessfully created data');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -68,5 +68,17 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showInfo()
+    {
+        $category = Category::with(['services'])
+            ->withCount('services')
+            ->orderBy('services_count', 'desc')
+            ->first();
+
+        return response()->json([
+            'msg' => '<div class="alert alert-success"> Category dengan services terbanyak adalah '.$category->name.' </div>'
+        ]);
     }
 }
