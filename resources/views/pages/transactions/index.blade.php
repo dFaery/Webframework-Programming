@@ -23,6 +23,7 @@
                 <th>payment_method</th>
                 <th>payment_status</th>
                 <th>transaction_status</th>
+                <th>action</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,14 @@
                 <td>{{ $transaction->payment_method }}</td>
                 <td>{{ $transaction->payment_status }}</td>
                 <td>{{ $transaction->transaction_status }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ route('transactions.edit', $transaction->id) }}">Edit</a>
+                    <form action="{{ route('transactions.destroy', $transaction->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{ $transaction->id }} - {{ $transaction->transaction_code}}')">
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>
