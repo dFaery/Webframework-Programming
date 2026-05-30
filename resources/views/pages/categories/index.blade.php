@@ -12,14 +12,18 @@
     <h1>CATEGORIRES TABLE</h1>
     <p>The <a href="#" onclick="showInfo()">.table</a> class adds basic styling (light padding and only horizontal dividers) to a table:</p>
     <div id="showInfo"></div>
-    @if (@session('success'))
+</div>
+<div class="container">
+    @if(@session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
-
-</div>
-<div class="container">
+    @if(@session('status'))
+    <div class="alert alert-warning">
+        {{ session('status') }}
+    </div>
+    @endif
     <table class="table">
         <thead>
             <tr>
@@ -28,6 +32,7 @@
                 <th>Number of Services</th>
                 <th>Show images</th>
                 <th>Services</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +53,14 @@
                         <li>{{ $service->name }}</li>
                         @endforeach
                     </ul>
+                </td>
+                <td>
+                    <a class="btn btn-warning" href="{{ route('categories.edit', $category->id)}}">Edit</a>
+                    <form action="{{ route('categories.destroy', $category->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{ $category->id }} - {{ $category->name }}')">
+                    </form>
                 </td>
             </tr>
             @push ('modal')

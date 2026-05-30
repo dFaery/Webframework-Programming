@@ -56,24 +56,41 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Service $service)
     {
-        //
+        $categories = Category::all();
+        return view('pages.services.edit', compact('service', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Service $service)
     {
-        //
+        $service->name = $request->name;
+        $service->description = $request->description;
+        $service->availability = $request->availability;
+        $service->category_id = $request->category_id;
+        $service->price = $request->price;
+
+        $service->save();
+
+        return redirect()
+            ->route('services.index')
+            ->with('success', 'Successfully updated data');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Service $service)
     {
-        //
+        try {
+            $service->delete();
+            return redirect()->route('services.index')->with('success', 'Successfully deleted data');
+        } catch (\PDOException $ex) {
+            $msg = "Make sure there is no related data before deleting it.";
+            return redirect()->route('services.index')->with('status', $msg);
+        }
     }
 }

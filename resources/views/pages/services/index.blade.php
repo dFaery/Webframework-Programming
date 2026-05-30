@@ -8,6 +8,16 @@
     <a href="/services/create" class="btn btn-primary">+ Add new service</a>
 </div>
 <div class="container">
+    @if(@session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+    @if(@session('status'))
+    <div class="alert alert-warning">
+        {{ session('status') }}
+    </div>
+    @endif
     <table class="table">
         <thead>
             <tr>
@@ -18,6 +28,7 @@
                 <th>Price</th>
                 <th>Category ID</th>
                 <th>Category</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +45,14 @@
                 <td>{{ $service->price }}</td>
                 <td>{{ $service->category_id }}</td>
                 <td>{{ $service->category->name }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ route('services.edit', $service->id)}}">Edit</a>
+                    <form action="{{ route('services.destroy', $service->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{ $service->id }} - {{ $service->name }}')">
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

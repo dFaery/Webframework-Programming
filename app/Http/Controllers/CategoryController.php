@@ -26,7 +26,7 @@ class CategoryController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {        
+    {
         return view('pages.categories.create');
     }
 
@@ -49,25 +49,34 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        return view('pages.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->route('categories.index')->with('success', 'Successfully updated data');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        try {
+            $category->delete();
+            return redirect()->route('categories.index')->with('success', 'Successfully deleted data');
+        } catch (\PDOException $ex) {
+            $msg = "Make sure there is no related data before deleting it.";
+            return redirect()->route('categories.index')->with('status', $msg);
+        }
     }
 
     public function showInfo()
@@ -78,7 +87,7 @@ class CategoryController extends Controller
             ->first();
 
         return response()->json([
-            'msg' => '<div class="alert alert-success"> Category dengan services terbanyak adalah '.$category->name.' </div>'
+            'msg' => '<div class="alert alert-success"> Category dengan services terbanyak adalah ' . $category->name . ' </div>'
         ]);
     }
 }
