@@ -90,4 +90,44 @@ class CategoryController extends Controller
             'msg' => '<div class="alert alert-success"> Category dengan services terbanyak adalah ' . $category->name . ' </div>'
         ]);
     }
+
+    public function getEditForm(Request $request)
+    {
+        $id = $request->id;
+        $data = Category::find($id);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('pages.categories.getEditForm', compact('data'))->render()
+        ), 200);
+    }
+
+    public function getEditFormB(Request $request)
+    {
+        $id = $request->id;
+        $data = Category::find($id);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('pages.categories.getEditFormB', compact('data'))->render()
+        ), 200);
+    }
+
+    public function saveDataUpdate(Request $request)
+    {
+        $id = $request->id;
+        $data = Category::find($id);
+        $data->name = $request->name;
+        $data->save();
+        return response()->json(array('status' => 'oke', 'msg' => 'category data is up-to-date !'), 200);
+    }
+
+    public function deleteData(Request $request)
+    {
+        $id = $request->id;
+        $data = Category::find($id);
+        $data->delete();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => 'category data is removed !'
+        ), 200);
+    }
 }

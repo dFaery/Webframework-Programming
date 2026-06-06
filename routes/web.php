@@ -21,16 +21,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::resource('photos', PhotoController::class);
 Route::resource('unresources', UnresourceController::class);
 
 Route::get('/', function () {
     return redirect('/home');
-    });
-    
-    Route::get('/welcome', function(){
-        return "Selamat Datang di Portal Kesehatan";
-        });                
+});
+
+Route::get('/welcome', function () {
+    return "Selamat Datang di Portal Kesehatan";
+});
 
 Route::resource('home', HomeController::class);
 Route::resource('services', ServiceController::class);
@@ -38,7 +39,16 @@ Route::resource('categories', CategoryController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('transactions', TransactionController::class);
 
-Route::post("/category/showInfo",[CategoryController::class, 'showInfo'])->name("category.showInfo");
+Route::post("/category/showInfo", [CategoryController::class, 'showInfo'])->name("category.showInfo");
+Route::post('/category/getEditForm', [CategoryController::class, 'getEditForm'])
+    ->name('category.getEditForm');
+Route::post('/ajax/category/getEditFormB', [CategoryController::class, 'getEditFormB'])
+    ->name('category.getEditFormB');
+
+Route::post('/ajax/category/saveDataUpdate', [CategoryController::class, 'saveDataUpdate'])
+    ->name('category.saveDataUpdate');
+Route::post('/ajax/category/deleteData', [CategoryController::class, 'deleteData'])
+    ->name('category.deleteData');
 // Route::resource('/home', HomeController::class);
 // Route::resource('/home', HomeController::class);
 
