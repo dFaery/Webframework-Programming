@@ -117,4 +117,18 @@ class TransactionController extends Controller
             return redirect()->route('transactions.index')->with('status', $msg);
         }
     }
+
+    public function getEditForm(Request $request)
+    {
+        $id = $request->id;
+        $transaction = Transaction::find($id);
+        $services = Service::all();
+        $users = User::all();
+        $doctors = Doctor::all();
+
+        return response()->json([
+            'status' => 'oke',
+            'msg' => view('pages.transactions.getEditForm', compact('transaction', 'services', 'users', 'doctors'))->render()
+        ], 200);
+    }
 }

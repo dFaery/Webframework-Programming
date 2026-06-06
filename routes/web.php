@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PhotoController;
@@ -38,6 +39,7 @@ Route::resource('services', ServiceController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('transactions', TransactionController::class);
+Route::resource('articles', ArticleController::class);
 
 Route::post("/category/showInfo", [CategoryController::class, 'showInfo'])->name("category.showInfo");
 Route::post('/category/getEditForm', [CategoryController::class, 'getEditForm'])
@@ -49,6 +51,18 @@ Route::post('/ajax/category/saveDataUpdate', [CategoryController::class, 'saveDa
     ->name('category.saveDataUpdate');
 Route::post('/ajax/category/deleteData', [CategoryController::class, 'deleteData'])
     ->name('category.deleteData');
+Route::post('/ajax/service/getEditForm', [ServiceController::class, 'getEditForm'])
+    ->name('services.getEditForm');
+
+// doctor
+Route::post('/ajax/doctor/getEditForm', [DoctorController::class, 'getEditForm'])->name('doctor.getEditForm');
+Route::post('/ajax/doctor/deleteData', [DoctorController::class, 'deleteData'])
+    ->name('doctor.deleteData');
+
+
+Route::post('/ajax/transaction/getEditForm', [TransactionController::class, 'getEditForm'])->name('transaction.getEditForm');
+Route::post('/ajax/article/getEditForm', [ArticleController::class, 'getEditForm'])->name('article.getEditForm');
+Route::post('/ajax/article/deleteData', [ArticleController::class, 'deleteData'])->name('article.deleteData');
 // Route::resource('/home', HomeController::class);
 // Route::resource('/home', HomeController::class);
 

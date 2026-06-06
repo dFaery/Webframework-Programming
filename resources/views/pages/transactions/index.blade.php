@@ -42,6 +42,7 @@
                 <td>{{ $transaction->transaction_status }}</td>
                 <td>
                     <a class="btn btn-warning" href="{{ route('transactions.edit', $transaction->id) }}">Edit</a>
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdit" onclick="getEditForm({{ $transaction->id }})">Edit with modal</a>
                     <form action="{{ route('transactions.destroy', $transaction->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -53,5 +54,39 @@
         </tbody>
     </table>
 </div>
-
 @endsection
+@push('modals')
+    <div class="modal fade" id="modalEdit" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog modal-wide">
+            <div class="modal-content">
+                <div class="modal-body" id="modalContent">
+                    {{-- Animasi loading bisa diletakkan di sini --}}
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
+
+@push('script')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        function getEditForm(id) {
+            $('#modalContent').html('Memuat data...');
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('transaction.getEditForm') }}",
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'id': id
+                },
+                success: function(data) {
+                    $('#modalContent').html(data.msg);
+                },
+                error: function() {
+                    $('#modalContent').html('Gagal memuat data.');
+                }
+            });
+        }
+    </script>
+@endpush

@@ -312,6 +312,12 @@
                                 <p>Transactions</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/articles" class="nav-link {{ Request::is('articles') ? 'active' : '' }}">
+                                <i class="bi bi-journal-text"></i>
+                                <p>Articles</p>
+                            </a>
+                        </li>
                         <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon bi bi-box-seam-fill"></i>

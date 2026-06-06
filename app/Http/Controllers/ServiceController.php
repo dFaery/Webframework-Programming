@@ -93,4 +93,15 @@ class ServiceController extends Controller
             return redirect()->route('services.index')->with('status', $msg);
         }
     }
+
+    public function getEditForm(Request $request)
+    {
+        $id = $request->id;
+        $service = Service::find($id);
+        $categories = Category::all();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('pages.services.getEditForm', compact('service', 'categories'))->render()
+        ), 200);
+    }
 }
